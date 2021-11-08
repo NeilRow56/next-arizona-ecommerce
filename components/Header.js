@@ -22,11 +22,16 @@ const Header = (props) => {
 		<Flex
 			as="nav"
 			align="center"
+			width="100%"
 			justify="space-between"
 			wrap="wrap"
 			padding={1}
 			bg="primary"
 			color="white"
+			overflow="hidden"
+			position="sticky"
+			left="0"
+			top="-100"
 		>
 			<Flex align="center" mr={5}>
 				<Heading as="h1" size="lg" letterSpacing={'tighter'}>
