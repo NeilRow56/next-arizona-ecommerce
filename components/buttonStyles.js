@@ -11,7 +11,7 @@ export const ButtonStyles = {
 			bg: 'primary',
 			color: 'white',
 			_hover: {
-				bg: mode(whiten('primary', 20), darken('primary', 20))(props),
+				bg: mode(whiten('primary', 40), darken('primary', 40))(props),
 				boxShadow: 'md',
 			},
 		}),
@@ -20,8 +20,8 @@ export const ButtonStyles = {
 			color: 'white',
 			_hover: {
 				bg: mode(
-					whiten('secondary', 20),
-					darken('secondary', 20)
+					whiten('secondary', 40),
+					darken('secondary', 40)
 				)(props),
 				boxShadow: 'md',
 			},
@@ -31,8 +31,8 @@ export const ButtonStyles = {
 			color: 'white',
 			_hover: {
 				bg: mode(
-					whiten('secondary', 20),
-					darken('secondary', 20)
+					whiten('secondary', 40),
+					darken('secondary', 40)
 				)(props),
 				boxShadow: 'md',
 			},

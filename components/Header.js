@@ -3,6 +3,7 @@ import {
 	Box,
 	Stack,
 	Heading,
+	Link,
 	IconButton,
 	Flex,
 	Text,
@@ -35,34 +36,25 @@ const Header = (props) => {
 		>
 			<Flex align="center" mr={5}>
 				<Heading as="h1" size="lg" letterSpacing={'tighter'}>
-					Amazona
+					<NextLink href="/" passHref>
+						<Link>Amazona</Link>
+					</NextLink>
 				</Heading>
 			</Flex>
 			<Spacer />
 			<Flex display={['none', 'none', 'flex', 'flex']}>
-				<NextLink href="/" passHref>
+				<NextLink href="/cart" passHref>
 					<Button
 						as="a"
 						variant="primary"
-						aria-label="Home"
+						aria-label="Cart"
 						my={1}
 						w="100%"
 					>
-						Home
+						Cart
 					</Button>
 				</NextLink>
-				<NextLink href="/" passHref>
-					<Button
-						as="a"
-						variant="primary"
-						aria-label="Home1"
-						my={1}
-						w="100%"
-					>
-						Home1
-					</Button>
-				</NextLink>
-				<NextLink href="/" passHref>
+				<NextLink href="/login" passHref>
 					<Button
 						as="a"
 						variant="primary"
@@ -70,7 +62,7 @@ const Header = (props) => {
 						my={1}
 						w="100%"
 					>
-						Home2
+						Login
 					</Button>
 				</NextLink>
 			</Flex>
@@ -123,22 +115,22 @@ const Header = (props) => {
 						<Button
 							as="a"
 							variant="primary"
-							aria-label="Home1"
+							aria-label="Cart"
 							my={1}
 							w="100%"
 						>
-							Home1
+							Cart
 						</Button>
 					</NextLink>
 					<NextLink href="/" passHref>
 						<Button
 							as="a"
 							variant="primary"
-							aria-label="Home2"
+							aria-label="Login"
 							my={1}
 							w="100%"
 						>
-							Home2
+							Login
 						</Button>
 					</NextLink>
 				</Flex>

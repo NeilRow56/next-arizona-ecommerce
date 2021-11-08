@@ -1,14 +1,19 @@
 import Layout from '../components/Layout';
 import { StarIcon } from '@chakra-ui/icons';
+import NextLink from 'next/link';
 import {
 	Text,
 	AspectRatio,
+	Button,
 	Center,
+	Spacer,
 	Flex,
 	Image,
 	Container,
 	Box,
 	Badge,
+	LinkBox,
+	LinkOverlay,
 	UnorderedList,
 	ListItem,
 	Grid,
@@ -38,7 +43,7 @@ export default function Home() {
 							bg="papayawhip"
 							key={product.name}
 						>
-							<Box
+							<LinkBox
 								align="center"
 								maxW="md"
 								paddingTop="10px"
@@ -72,7 +77,11 @@ export default function Home() {
 											textTransform="uppercase"
 											ml="2"
 										>
-											{product.name}
+											<NextLink href="#" passHref>
+												<LinkOverlay>
+													{product.name}
+												</LinkOverlay>
+											</NextLink>
 										</Box>
 									</Box>
 
@@ -93,9 +102,23 @@ export default function Home() {
 										fontSize="sm"
 										display="flex"
 									>
-										<Text>Price: £ {product.price}</Text>
-									</Box>
+										<Center>
+											<Text>
+												Price: £ {product.price}
+											</Text>
+										</Center>
 
+										<Box width="70%">
+											<Center>
+												<Button
+													variant="primary"
+													size="sm"
+												>
+													Add to cart
+												</Button>
+											</Center>
+										</Box>
+									</Box>
 									<Box
 										display="flex"
 										mt="2"
@@ -123,7 +146,7 @@ export default function Home() {
 										</Box>
 									</Box>
 								</Box>
-							</Box>
+							</LinkBox>
 						</GridItem>
 					))}
 				</Grid>
