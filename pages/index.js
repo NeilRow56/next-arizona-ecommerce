@@ -22,8 +22,12 @@ import {
 	GridItem,
 } from '@chakra-ui/react';
 import data from '../utils/data';
+import db from '../utils/db';
+import Product from '../models/Product';
 
-export default function Home() {
+export default function Home(props) {
+	const { products } = props;
+
 	return (
 		<Layout>
 			<Container maxW="100%" overflow="hidden">
@@ -148,4 +152,14 @@ export default function Home() {
 			</Container>
 		</Layout>
 	);
+}
+export async function getServerSideProps() {
+	await db.connect();
+	const products = await Product.find({}).lean();
+	await db.disconnect();
+	return {
+		props: {
+			products: products.map(db.convertDocToObj),
+		},
+	};
 }
