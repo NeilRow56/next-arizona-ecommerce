@@ -1,26 +1,41 @@
 import Head from 'next/head';
+
 import Header from './Header';
 import Footer from './Footer';
 
-import { Flex, Center, Icon, Spacer, Divider, Link } from '@chakra-ui/react';
+import {
+	Flex,
+	Center,
+	Container,
+	Icon,
+	Spacer,
+	Divider,
+	Link,
+} from '@chakra-ui/react';
 
 export default function Layout({ title, keywords, description, children }) {
 	return (
 		<div>
 			<Head>
-				<title>{title}</title>
-				<meta name="description" content={description} />
+				<title>
+					{title ? `${title} - Next Amazona` : 'Next Amazona'}
+				</title>
+				{description && (
+					<meta name="description" content={description}></meta>
+				)}
+
 				<meta name="keywords" content={keywords} />
 			</Head>
 			<Header />
 
-			<Flex
+			<Container
 				// backgroundColor="blue.50"
 				padding="10px"
 				minHeight="87vh"
+				maxWidth="70%"
 			>
 				{children}
-			</Flex>
+			</Container>
 			<Footer />
 		</div>
 	);
