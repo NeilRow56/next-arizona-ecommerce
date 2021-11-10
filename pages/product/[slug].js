@@ -1,6 +1,3 @@
-import { useRouter } from 'next/router';
-import data from '../../utils/data';
-
 import Layout from '../../components/Layout';
 import NextLink from 'next/link';
 import {

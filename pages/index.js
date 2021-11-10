@@ -21,7 +21,6 @@ import {
 	Grid,
 	GridItem,
 } from '@chakra-ui/react';
-import data from '../utils/data';
 import db from '../utils/db';
 import Product from '../models/Product';
 
@@ -37,7 +36,7 @@ export default function Home(props) {
 					</Text>
 				</Flex>
 				<Wrap spacing="20px" justify="center">
-					{data.products.map((product) => (
+					{products.map((product) => (
 						<WrapItem key={product.name}>
 							<Center w="400px" h="500px">
 								<LinkBox
