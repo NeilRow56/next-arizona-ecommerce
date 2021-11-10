@@ -17,6 +17,10 @@ const config = {
 const myNewTheme = extendTheme({
 	colors: {
 		primary: '#04250e',
+		prime: {
+			100: '#f0c000',
+		},
+
 		secondary: '#f01919',
 		danger: '#f01919',
 		brand: {

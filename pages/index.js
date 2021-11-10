@@ -105,7 +105,7 @@ export default function Home() {
 											<Box width="70%">
 												<Center>
 													<Button
-														variant="primary"
+														bg="prime.100"
 														size="sm"
 													>
 														Add to cart

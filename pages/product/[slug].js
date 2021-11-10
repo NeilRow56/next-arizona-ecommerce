@@ -40,7 +40,7 @@ function ProductScreen() {
 			<Flex>
 				<Box flex="1" align="center" mt={10} mb={10}>
 					<NextLink href="/" passHref>
-						<Link>back to products</Link>
+						<Link color="prime.100">back to products</Link>
 					</NextLink>
 				</Box>
 			</Flex>
@@ -142,7 +142,7 @@ function ProductScreen() {
 								<Center>
 									<Button
 										width="90%"
-										bg="yellow.400"
+										bg="prime.100"
 										marginBottom="5px"
 									>
 										Add to cart
