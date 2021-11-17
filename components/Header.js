@@ -1,8 +1,9 @@
-import React from 'react';
 import {
 	Box,
 	Stack,
 	Heading,
+	Badge,
+	Circle,
 	Link,
 	IconButton,
 	Flex,
@@ -14,11 +15,16 @@ import TogButton from './TogButton';
 import NextLink from 'next/link';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
+import React, { useContext } from 'react';
+import { Store } from '../utils/Store';
+import Cookies from 'js-cookie';
 
 const Header = (props) => {
 	const handleToggle = () => (isOpen ? onClose() : onOpen());
 	const [display, changeDisplay] = useState('none');
+	const { state, dispatch } = useContext(Store);
 
+	const { cart } = state;
 	return (
 		<Flex
 			as="nav"
@@ -42,6 +48,15 @@ const Header = (props) => {
 				</Heading>
 			</Flex>
 			<Spacer />
+
+			{cart.cartItems.length > 0 ? (
+				<Circle color="white" bgColor="teal" width="35px" heigth="35px">
+					{' '}
+					{cart.cartItems.length}
+				</Circle>
+			) : (
+				[]
+			)}
 			<Flex display={['none', 'none', 'flex', 'flex']}>
 				<NextLink href="/cart" passHref>
 					<Button

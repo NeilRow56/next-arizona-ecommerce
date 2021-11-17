@@ -1,17 +1,8 @@
 import Head from 'next/head';
-
 import Header from './Header';
 import Footer from './Footer';
 
-import {
-	Flex,
-	Center,
-	Container,
-	Icon,
-	Spacer,
-	Divider,
-	Link,
-} from '@chakra-ui/react';
+import { Container } from '@chakra-ui/react';
 
 export default function Layout({ title, keywords, description, children }) {
 	return (
