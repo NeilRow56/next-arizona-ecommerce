@@ -4,11 +4,9 @@ import { createContext, useReducer } from 'react';
 export const Store = createContext();
 const initialState = {
 	cart: {
-		cartItems:
-			// Cookies.get('cartItems')
-			// 	? JSON.parse(Cookies.get('cartItems'))
-			// 	:
-			[],
+		cartItems: Cookies.get('cartItems')
+			? JSON.parse(Cookies.get('cartItems'))
+			: [],
 	},
 };
 
@@ -25,7 +23,7 @@ function reducer(state, action) {
 				  )
 				: [...state.cart.cartItems, newItem];
 			console.log(cartItems.length);
-			// Cookies.set('cartItems', JSON.stringify(cartItems));
+			Cookies.set('cartItems', JSON.stringify(cartItems));
 			return { ...state, cart: { ...state.cart, cartItems } };
 		}
 		default:
