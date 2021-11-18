@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Store } from '../utils/Store';
 import NextLink from 'next/link';
 import Image from 'next/image';
+import axios from 'axios';
 import dynamic from 'next/dynamic';
 import {
 	Box,
@@ -35,11 +36,21 @@ import {
 import Layout from '../components/Layout';
 
 function CartScreen() {
-	const { state } = useContext(Store);
+	const { state, dispatch } = useContext(Store);
 	const {
 		cart: { cartItems },
 	} = state;
-
+	const updateCartHandler = async (item, quantity) => {
+		const { data } = await axios.get(`/api/products/${item._id}`);
+		if (data.countInStock < quantity) {
+			window.alert('Sorry. Product is out of stock');
+			return;
+		}
+		dispatch({ type: 'CART_ADD_ITEM', payload: { ...item, quantity } });
+	};
+	const removeItemHandler = (item) => {
+		dispatch({ type: 'CART_REMOVE_ITEM', payload: item });
+	};
 	return (
 		<Layout title="Shopping Cart">
 			<Heading component="h1" variant="h1" mb={10}>
@@ -47,7 +58,10 @@ function CartScreen() {
 			</Heading>
 			{cartItems.length === 0 ? (
 				<div>
-					Cart is empty. <NextLink href="/">Go shopping</NextLink>
+					Cart is empty.{' '}
+					<NextLink href="/" passHref>
+						<Link>Go shopping</Link>
+					</NextLink>
 				</div>
 			) : (
 				<Wrap spacing="30px" align="center">
@@ -98,7 +112,13 @@ function CartScreen() {
 										</Td>
 										<Td align="right">
 											<Select
-												defaultValue={item.quantity}
+												value={item.quantity}
+												onChange={(e) =>
+													updateCartHandler(
+														item,
+														e.target.value
+													)
+												}
 											>
 												{[
 													...Array(
@@ -120,6 +140,9 @@ function CartScreen() {
 												variant="contained"
 												bgColor="secondary"
 												color="#fff"
+												onClick={() =>
+													removeItemHandler(item)
+												}
 											>
 												x
 											</Button>
@@ -144,7 +167,7 @@ function CartScreen() {
 									<Text>
 										Subtotal (
 										{cartItems.reduce(
-											(a, c) => a + c.quantity,
+											(a, c) => a + c.quantity * 1,
 											0
 										)}{' '}
 										items) : £
