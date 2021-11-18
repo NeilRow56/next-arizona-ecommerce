@@ -60,7 +60,9 @@ function CartScreen() {
 				<div>
 					Cart is empty.{' '}
 					<NextLink href="/" passHref>
-						<Link>Go shopping</Link>
+						<Link>
+							<Text color="prime.100">Back to products</Text>
+						</Link>
 					</NextLink>
 				</div>
 			) : (
