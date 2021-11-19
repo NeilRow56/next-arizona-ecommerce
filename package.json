@@ -19,6 +19,7 @@
     "@fontsource/raleway": "^4.5.0",
     "@fontsource/roboto": "^4.5.1",
     "axios": "^0.24.0",
+    "bcryptjs": "^2.4.3",
     "framer-motion": "^4.1.17",
     "js-cookie": "^3.0.1",
     "mongoose": "^6.0.12",
