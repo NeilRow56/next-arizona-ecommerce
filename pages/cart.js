@@ -34,8 +34,10 @@ import {
 	WrapItem,
 } from '@chakra-ui/react';
 import Layout from '../components/Layout';
+import { useRouter } from 'next/router';
 
 function CartScreen() {
+	const router = useRouter();
 	const { state, dispatch } = useContext(Store);
 	const {
 		cart: { cartItems },
@@ -50,6 +52,9 @@ function CartScreen() {
 	};
 	const removeItemHandler = (item) => {
 		dispatch({ type: 'CART_REMOVE_ITEM', payload: item });
+	};
+	const checkoutHandler = () => {
+		router.push('/shipping');
 	};
 	return (
 		<Layout title="Shopping Cart">
@@ -181,6 +186,7 @@ function CartScreen() {
 								</ListItem>
 								<ListItem>
 									<Button
+										onClick={checkoutHandler}
 										variant="Contained"
 										bg="prime.100"
 										isFullWidth
