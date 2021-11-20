@@ -35,7 +35,7 @@ const Header = (props) => {
 			padding={1}
 			bg="primary"
 			color="white"
-			overflow="hidden"
+			overflow="auto"
 			position="sticky"
 			left="0"
 			top="-100"
@@ -96,7 +96,7 @@ const Header = (props) => {
 				bgColor="gray.50"
 				zIndex={20}
 				h="100vh"
-				pos="fixed"
+				position="fixed"
 				top="0"
 				left="0"
 				overflow="auto"
@@ -126,7 +126,7 @@ const Header = (props) => {
 							Home
 						</Button>
 					</NextLink>
-					<NextLink href="/" passHref>
+					<NextLink href="/cart" passHref>
 						<Button
 							as="a"
 							variant="primary"
@@ -134,10 +134,10 @@ const Header = (props) => {
 							my={1}
 							w="100%"
 						>
-							Cart
+							Cart2
 						</Button>
 					</NextLink>
-					<NextLink href="/" passHref>
+					<NextLink href="/login" passHref>
 						<Button
 							as="a"
 							variant="primary"
@@ -145,7 +145,7 @@ const Header = (props) => {
 							my={1}
 							w="100%"
 						>
-							Login
+							Login2
 						</Button>
 					</NextLink>
 				</Flex>

@@ -1,7 +1,7 @@
 import React from 'react';
 import NextLink from 'next/link';
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import Layout from '../components/Layout';
 import {
 	FormControl,
@@ -17,8 +17,18 @@ import {
 	Input,
 	Text,
 } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+import Cookies from 'js-cookie';
+import { Store } from '../utils/Store';
 
 export default function Login() {
+	const router = useRouter();
+	const { redirect } = router.query;
+	const { state, dispatch } = useContext(Store);
+	const { userInfo } = state;
+	if (userInfo) {
+		router.push('/');
+	}
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const submitHandler = async (e) => {
@@ -28,7 +38,9 @@ export default function Login() {
 				email,
 				password,
 			});
-			alert('succss login');
+			dispatch({ type: 'USER_LOGIN', payload: data });
+			Cookies.set('userInfo', JSON.stringify(data));
+			router.push(redirect || '/');
 		} catch (err) {
 			alert(err.response.data ? err.response.data.message : err.message);
 		}
@@ -36,8 +48,8 @@ export default function Login() {
 	return (
 		<Layout>
 			<Flex align="center" margin="auto" justifyContent="center">
-				<Box p={2}>
-					<Box textAlign="center" width="600px">
+				<Box p={2} mt={20}>
+					<Box textAlign="center" Maxwidth="800px">
 						<Heading>Login</Heading>
 					</Box>
 					<Box my={4} textAlign="left">
