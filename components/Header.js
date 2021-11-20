@@ -24,7 +24,8 @@ const Header = (props) => {
 	const [display, changeDisplay] = useState('none');
 	const { state, dispatch } = useContext(Store);
 
-	const { cart } = state;
+	const { cart, userInfo } = state;
+
 	return (
 		<Flex
 			as="nav"
@@ -69,17 +70,29 @@ const Header = (props) => {
 						Cart
 					</Button>
 				</NextLink>
-				<NextLink href="/login" passHref>
+				{userInfo ? (
 					<Button
 						as="a"
 						variant="primary"
-						aria-label="Home2"
+						aria-label="Login"
 						my={1}
 						w="100%"
 					>
-						Login
+						{userInfo.name}
 					</Button>
-				</NextLink>
+				) : (
+					<NextLink href="/login" passHref>
+						<Button
+							as="a"
+							variant="primary"
+							aria-label="Login"
+							my={1}
+							w="100%"
+						>
+							Login
+						</Button>
+					</NextLink>
+				)}
 			</Flex>
 			<IconButton
 				aria-label="Open Menu"
