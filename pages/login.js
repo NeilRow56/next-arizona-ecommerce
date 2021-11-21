@@ -52,7 +52,7 @@ export default function Login() {
 		<Layout>
 			<Flex align="center" margin="auto" justifyContent="center">
 				<Box p={2} mt={20}>
-					<Box textAlign="center" Maxwidth="800px">
+					<Box textAlign="center" maxWidth="500px">
 						<Heading>Login</Heading>
 					</Box>
 					<Box my={4} textAlign="left">
@@ -77,6 +77,7 @@ export default function Login() {
 									}
 								/>
 							</FormControl>
+
 							<Button
 								width="full"
 								mt={4}

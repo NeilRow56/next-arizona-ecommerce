@@ -21,6 +21,7 @@ import NextLink from 'next/link';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import ClientOnly from './ClientOnly';
 import React, { useContext } from 'react';
 import { Store } from '../utils/Store';
 import Cookies from 'js-cookie';
@@ -79,61 +80,58 @@ const Header = (props) => {
 			) : (
 				[]
 			)}
-			<Flex display={['none', 'none', 'flex', 'flex']}>
-				<NextLink href="/cart" passHref>
-					<Button
-						as="a"
-						color="prime.100"
-						variant="primary"
-						aria-label="Cart"
-						mr={1}
-						w="100%"
-					>
-						Cart
-					</Button>
-				</NextLink>
-				{userInfo ? (
-					<Menu anchorEl={anchorEl}>
-						<MenuButton
-							color="prime.100"
-							onClick={loginClickHandler}
-						>
-							{userInfo.name}
-						</MenuButton>
-						<Portal>
-							<MenuList>
-								<MenuItem
-									MenuItem
-									onClick={loginMenuCloseHandler}
-								>
-									Profile
-								</MenuItem>
-								<MenuItem
-									MenuItem
-									onClick={loginMenuCloseHandler}
-								>
-									My account
-								</MenuItem>
-								<MenuItem MenuItem onClick={logoutClickHandler}>
-									Logout
-								</MenuItem>
-							</MenuList>
-						</Portal>
-					</Menu>
-				) : (
-					<NextLink href="/login" passHref>
+			<ClientOnly>
+				<Flex display={['none', 'none', 'flex', 'flex']}>
+					<NextLink href="/cart" passHref>
 						<Button
 							as="a"
 							variant="primary"
-							aria-label="Login"
+							aria-label="Cart"
 							my={1}
 							w="100%"
 						>
-							Login
+							Cart
 						</Button>
 					</NextLink>
-				)}
-			</Flex>
+					{userInfo ? (
+						<Menu
+							anchorEl={anchorEl}
+							keepMounted
+							open={Boolean(anchorEl)}
+							onClose={loginMenuCloseHandler}
+						>
+							<MenuButton onClick={loginClickHandler}>
+								{userInfo.name}
+							</MenuButton>
+							<Portal>
+								<MenuList>
+									<MenuItem onClick={loginMenuCloseHandler}>
+										Profile
+									</MenuItem>
+									<MenuItem onClick={loginMenuCloseHandler}>
+										My Account
+									</MenuItem>
+									<MenuItem onClick={logoutClickHandler}>
+										Logout
+									</MenuItem>
+								</MenuList>
+							</Portal>
+						</Menu>
+					) : (
+						<NextLink href="/login" passHref>
+							<Button
+								as="a"
+								variant="primary"
+								aria-label="Login"
+								my={1}
+								w="100%"
+							>
+								Login
+							</Button>
+						</NextLink>
+					)}
+				</Flex>
+			</ClientOnly>
 			<IconButton
 				aria-label="Open Menu"
 				size="lg"
