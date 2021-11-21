@@ -53,6 +53,7 @@ export default function Home(props) {
 						Products
 					</Text>
 				</Flex>
+
 				<Wrap spacing="20px" justify="center">
 					{products.map((product) => (
 						<WrapItem key={product.name}>

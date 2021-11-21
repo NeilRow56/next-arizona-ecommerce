@@ -1,7 +1,7 @@
 import React from 'react';
 import NextLink from 'next/link';
 import axios from 'axios';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import Layout from '../components/Layout';
 import {
 	FormControl,
@@ -26,9 +26,12 @@ export default function Login() {
 	const { redirect } = router.query;
 	const { state, dispatch } = useContext(Store);
 	const { userInfo } = state;
-	if (userInfo) {
-		router.push('/');
-	}
+	useEffect(() => {
+		if (userInfo) {
+			router.push('/');
+		}
+	}, []);
+
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const submitHandler = async (e) => {

@@ -2,6 +2,11 @@ import {
 	Box,
 	Stack,
 	Heading,
+	Menu,
+	MenuItem,
+	MenuList,
+	MenuButton,
+	Portal,
 	Badge,
 	Circle,
 	Link,
@@ -15,16 +20,32 @@ import TogButton from './TogButton';
 import NextLink from 'next/link';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import React, { useContext } from 'react';
 import { Store } from '../utils/Store';
 import Cookies from 'js-cookie';
 
 const Header = (props) => {
+	const router = useRouter();
 	const handleToggle = () => (isOpen ? onClose() : onOpen());
 	const [display, changeDisplay] = useState('none');
 	const { state, dispatch } = useContext(Store);
 
 	const { cart, userInfo } = state;
+	const [anchorEl, setAnchorEl] = useState(null);
+	const loginClickHandler = (e) => {
+		setAnchorEl(e.currentTarget);
+	};
+	const loginMenuCloseHandler = () => {
+		setAnchorEl(null);
+	};
+	const logoutClickHandler = () => {
+		setAnchorEl(null);
+		dispatch({ type: 'USER_LOGOUT' });
+		Cookies.remove('userInfo');
+		Cookies.remove('cartItems');
+		router.push('/');
+	};
 
 	return (
 		<Flex
@@ -62,24 +83,43 @@ const Header = (props) => {
 				<NextLink href="/cart" passHref>
 					<Button
 						as="a"
+						color="prime.100"
 						variant="primary"
 						aria-label="Cart"
-						my={1}
+						mr={1}
 						w="100%"
 					>
 						Cart
 					</Button>
 				</NextLink>
 				{userInfo ? (
-					<Button
-						as="a"
-						variant="primary"
-						aria-label="Login"
-						my={1}
-						w="100%"
-					>
-						{userInfo.name}
-					</Button>
+					<Menu anchorEl={anchorEl}>
+						<MenuButton
+							color="prime.100"
+							onClick={loginClickHandler}
+						>
+							{userInfo.name}
+						</MenuButton>
+						<Portal>
+							<MenuList>
+								<MenuItem
+									MenuItem
+									onClick={loginMenuCloseHandler}
+								>
+									Profile
+								</MenuItem>
+								<MenuItem
+									MenuItem
+									onClick={loginMenuCloseHandler}
+								>
+									My account
+								</MenuItem>
+								<MenuItem MenuItem onClick={logoutClickHandler}>
+									Logout
+								</MenuItem>
+							</MenuList>
+						</Portal>
+					</Menu>
 				) : (
 					<NextLink href="/login" passHref>
 						<Button
