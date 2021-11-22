@@ -21,7 +21,7 @@ import { useRouter } from 'next/router';
 import Cookies from 'js-cookie';
 import { Store } from '../utils/Store';
 
-export default function Login() {
+export default function Register() {
 	const router = useRouter();
 	const { redirect } = router.query;
 	const { state, dispatch } = useContext(Store);
@@ -32,12 +32,19 @@ export default function Login() {
 		}
 	}, []);
 
+	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [confirmPassword, setConfirmPassword] = useState('');
 	const submitHandler = async (e) => {
 		e.preventDefault();
+		if (password !== confirmPassword) {
+			alert('Passwords do not match');
+			return;
+		}
 		try {
-			const { data } = await axios.post('/api/users/login', {
+			const { data } = await axios.post('/api/users/register', {
+				name,
 				email,
 				password,
 			});
@@ -49,31 +56,51 @@ export default function Login() {
 		}
 	};
 	return (
-		<Layout title="Login">
+		<Layout title="Register">
 			<Flex align="center" margin="auto" justifyContent="center">
 				<Box p={2} mt={20}>
 					<Box textAlign="center" maxWidth="500px">
-						<Heading>Login</Heading>
+						<Heading>Register</Heading>
 					</Box>
 					<Box my={4} textAlign="left">
 						<form onSubmit={submitHandler}>
-							<FormControl>
+							<FormControl id="name">
+								<FormLabel>Name</FormLabel>
+								<Input
+									id="name"
+									type="text"
+									placeholder="Name"
+									onChange={(e) => setName(e.target.value)}
+								/>
+							</FormControl>
+							<FormControl id="email">
 								<FormLabel>Email</FormLabel>
 								<Input
-									type="email"
 									id="email"
+									type="email"
 									placeholder="example@example.com"
 									onChange={(e) => setEmail(e.target.value)}
 								/>
 							</FormControl>
-							<FormControl mt={6}>
+							<FormControl mt={6} id="password">
 								<FormLabel>Password</FormLabel>
 								<Input
-									type="password"
 									id="password"
+									type="password"
 									placeholder="*******"
 									onChange={(e) =>
 										setPassword(e.target.value)
+									}
+								/>
+							</FormControl>
+							<FormControl mt={6} id="confirmPassword">
+								<FormLabel>Confirm Password</FormLabel>
+								<Input
+									id="confirmPassword"
+									type="password"
+									placeholder="Confirm Password"
+									onChange={(e) =>
+										setConfirmPassword(e.target.value)
 									}
 								/>
 							</FormControl>
@@ -85,13 +112,13 @@ export default function Login() {
 								type="submit"
 								bg="prime.100"
 							>
-								Login
+								Register
 							</Button>
 							<List>
 								<ListItem>
-									Don't have an account? &nbsp;
+									Already have an account? &nbsp;
 									<NextLink
-										href={`/register?redirect=${
+										href={`/login?redirect=${
 											redirect || '/'
 										}`}
 										passHref
